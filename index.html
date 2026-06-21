@@ -9,7 +9,7 @@
   <meta property="og:title" content="I Didn't Know I Was Me | Faith. Identity. Purpose."/>
   <meta property="og:description" content="Helping people discover their true identity in Christ. A community of Gideons — mighty, chosen, and purpose-filled."/>
   <meta property="og:type" content="website"/>
-  <link rel="icon" type="image/png" href="assets/logo-orange.png"/>
+  <link rel="icon" type="image/png" href="logo-orange.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -19,9 +19,10 @@
 
   <!-- NAV -->
   <header class="nav" id="nav">
-    <a href="index.html" class="nav__logo"><img src="assets/logo-orange.png" alt="I Didn't Know I Was Me" style="height:28px; display:block;"></a>
+    <a href="index.html" class="nav__logo"><img src="logo-orange.png" alt="I Didn't Know I Was Me" style="height:28px; display:block;"></a>
     <nav class="nav__links">
       <a href="blog.html">Blog</a>
+      <a href="podcast.html">Podcast</a>
       <a href="bible-studies.html">Bible Studies</a>
       <a href="about.html">About Us</a>
       <a href="founder.html">Our Story</a>
@@ -41,6 +42,7 @@
     <button class="mobile-menu__close" id="menuClose" aria-label="Close menu">✕</button>
     <nav>
       <a href="blog.html">Blog</a>
+      <a href="podcast.html">Podcast</a>
       <a href="bible-studies.html">Bible Studies</a>
       <a href="about.html">About Us</a>
       <a href="founder.html">Our Story</a>
@@ -101,60 +103,8 @@
         <a href="blog.html" class="btn btn--outline">Read All Posts</a>
       </div>
 
-      <div class="blog-grid">
-
-        <article class="blog-card">
-          <a href="blog-post.html" class="blog-card__link-wrap">
-            <div class="blog-card__img"></div>
-            <div class="blog-card__body">
-              <span class="blog-card__tag">Identity</span>
-              <h3>You Are Already Who God Says You Are</h3>
-              <p class="blog-card__meta">Tshiamo Ramokgadi &nbsp;·&nbsp; June 10, 2026</p>
-              <p class="blog-card__excerpt">The world gives you a label. God gives you a name. And only one of them is true.</p>
-              <span class="blog-card__read">Read more →</span>
-            </div>
-          </a>
-        </article>
-
-        <article class="blog-card">
-          <a href="blog-post.html" class="blog-card__link-wrap">
-            <div class="blog-card__img"></div>
-            <div class="blog-card__body">
-              <span class="blog-card__tag">Faith</span>
-              <h3>Dusting Off the Microphone</h3>
-              <p class="blog-card__meta">Tshiamo Ramokgadi &nbsp;·&nbsp; June 3, 2026</p>
-              <p class="blog-card__excerpt">For three years the microphone sat untouched. Sometimes obedience looks like waiting — and then surrendering.</p>
-              <span class="blog-card__read">Read more →</span>
-            </div>
-          </a>
-        </article>
-
-        <article class="blog-card">
-          <a href="blog-post.html" class="blog-card__link-wrap">
-            <div class="blog-card__img"></div>
-            <div class="blog-card__body">
-              <span class="blog-card__tag">Purpose</span>
-              <h3>The Gideon Inside You</h3>
-              <p class="blog-card__meta">Tshiamo Ramokgadi &nbsp;·&nbsp; May 27, 2026</p>
-              <p class="blog-card__excerpt">Gideon didn't see a mighty warrior when he looked in the mirror. But God did. What does God see when He looks at you?</p>
-              <span class="blog-card__read">Read more →</span>
-            </div>
-          </a>
-        </article>
-
-        <article class="blog-card">
-          <a href="blog-post.html" class="blog-card__link-wrap">
-            <div class="blog-card__img"></div>
-            <div class="blog-card__body">
-              <span class="blog-card__tag">Discipleship</span>
-              <h3>You Don't Have to Figure It Out Alone</h3>
-              <p class="blog-card__meta">Tshiamo Ramokgadi &nbsp;·&nbsp; May 19, 2026</p>
-              <p class="blog-card__excerpt">Community isn't optional in the Christian life. We are a family that holds each other up, walks together, and grows together.</p>
-              <span class="blog-card__read">Read more →</span>
-            </div>
-          </a>
-        </article>
-
+      <div class="blog-grid" id="homeBlogGrid">
+        <p style="padding:2rem; color:var(--muted);">Loading posts...</p>
       </div>
     </div>
   </section>
@@ -252,7 +202,7 @@
     <div class="container">
       <div class="footer__top">
         <div class="footer__brand">
-          <img src="assets/logo-orange.png" alt="I Didn't Know I Was Me" style="height:32px; margin-bottom:1rem;">
+          <img src="logo-orange.png" alt="I Didn't Know I Was Me" style="height:32px; margin-bottom:1rem;">
           <p>I Didn't Know I Was Me is a gospel-centered community platform helping people discover and walk in their true identity in Christ through content, discipleship, and community.</p>
           <div class="footer__socials">
             <a href="https://www.instagram.com/ididntknowiwasmee" target="_blank" rel="noopener">Instagram</a>
@@ -264,6 +214,7 @@
           <a href="about.html">About Us</a>
           <a href="founder.html">Our Story</a>
           <a href="blog.html">Blog</a>
+      <a href="podcast.html">Podcast</a>
           <a href="bible-studies.html">Bible Studies</a>
           <a href="contact.html">Contact</a>
           <a href="give.html">Give</a>
@@ -282,5 +233,55 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    async function loadHomePosts() {
+      const grid = document.getElementById('homeBlogGrid');
+      try {
+        const indexRes = await fetch('_posts/index.json', { cache: 'no-store' });
+        const indexData = await indexRes.json();
+        const files = (indexData.posts || []).slice(0, 4);
+
+        if (files.length === 0) {
+          grid.innerHTML = '<p style="padding:2rem; color:var(--muted);">No posts yet. Check back soon.</p>';
+          return;
+        }
+
+        const posts = await Promise.all(
+          files.map(async (f) => {
+            const r = await fetch('_posts/' + f, { cache: 'no-store' });
+            const data = await r.json();
+            data._filename = f;
+            return data;
+          })
+        );
+
+        posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        grid.innerHTML = posts.slice(0, 4).map(p => {
+          const dateStr = new Date(p.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+          const slug = encodeURIComponent(p._filename);
+          return `
+            <article class="blog-card">
+              <a href="post.html?post=${slug}" class="blog-card__link-wrap">
+                <div class="blog-card__img" ${p.image ? `style="background-image:url('${p.image}'); background-size:cover; background-position:center; opacity:1;"` : ''}></div>
+                <div class="blog-card__body">
+                  <span class="blog-card__tag">${p.tag || ''}</span>
+                  <h3>${p.title}</h3>
+                  <p class="blog-card__meta">${p.author || ''} &nbsp;·&nbsp; ${dateStr}</p>
+                  <p class="blog-card__excerpt">${p.excerpt || ''}</p>
+                  <span class="blog-card__read">Read more →</span>
+                </div>
+              </a>
+            </article>
+          `;
+        }).join('');
+
+      } catch (err) {
+        grid.innerHTML = '<p style="padding:2rem; color:var(--muted);">Unable to load posts right now.</p>';
+        console.error(err);
+      }
+    }
+    loadHomePosts();
+  </script>
 </body>
 </html>

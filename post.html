@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Blog | I Didn't Know I Was Me</title>
-  <meta name="description" content="Stories, devotionals, and reflections on faith, identity, and purpose in Christ."/>
+  <title id="pageTitle">Blog Post | I Didn't Know I Was Me</title>
   <link rel="icon" type="image/png" href="logo-orange.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css"/>
+  <!-- Lightweight markdown renderer -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/11.1.1/marked.min.js"></script>
 </head>
 <body>
 
@@ -46,22 +47,22 @@
     </nav>
   </div>
 
-  <!-- PAGE HERO -->
-  <section class="page-hero">
+  <!-- POST HERO -->
+  <section style="padding: calc(var(--nav-h) + 4rem) 0 3rem; border-bottom: 1px solid rgba(26,20,16,0.08);">
     <div class="container">
-      <p class="section-label">Latest</p>
-      <h1>Stories &amp; Devotionals</h1>
-    </div>
-  </section>
-
-  <!-- BLOG GRID (populated by JS) -->
-  <section class="blog-page-grid">
-    <div class="container">
-      <div class="blog-grid" id="blogGrid">
-        <p style="padding:2rem; color:var(--muted);">Loading posts...</p>
+      <a href="blog.html" style="font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted); font-weight:600; display:inline-block; margin-bottom:2rem;">← Back to Blog</a>
+      <div id="postHeader">
+        <p style="color:var(--muted);">Loading...</p>
       </div>
     </div>
   </section>
+
+  <!-- POST BODY -->
+  <article class="post-body" id="postBody" style="padding: 3.5rem 0 7rem;">
+    <div class="container">
+      <div style="max-width:700px;" id="postContent"></div>
+    </div>
+  </article>
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -100,55 +101,40 @@
 
   <script src="script.js"></script>
   <script>
-    async function loadPosts() {
-      const grid = document.getElementById('blogGrid');
+    async function loadPost() {
+      const params = new URLSearchParams(window.location.search);
+      const filename = params.get('post');
+      const headerEl = document.getElementById('postHeader');
+      const contentEl = document.getElementById('postContent');
+
+      if (!filename) {
+        headerEl.innerHTML = '<p>No post specified.</p>';
+        return;
+      }
+
       try {
-        const indexRes = await fetch('_posts/index.json', { cache: 'no-store' });
-        const indexData = await indexRes.json();
-        const files = indexData.posts || [];
+        const res = await fetch('_posts/' + filename, { cache: 'no-store' });
+        if (!res.ok) throw new Error('Not found');
+        const post = await res.json();
 
-        if (files.length === 0) {
-          grid.innerHTML = '<p style="padding:2rem; color:var(--muted);">No posts yet. Check back soon.</p>';
-          return;
-        }
+        document.getElementById('pageTitle').textContent = post.title + ' | I Didn\'t Know I Was Me';
 
-        const posts = await Promise.all(
-          files.map(async (f) => {
-            const r = await fetch('_posts/' + f, { cache: 'no-store' });
-            const data = await r.json();
-            data._filename = f;
-            return data;
-          })
-        );
+        const dateStr = new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
-        // Sort newest first
-        posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+        headerEl.innerHTML = `
+          <span class="blog-card__tag" style="display:block; margin-bottom:1rem;">${post.tag || ''}</span>
+          <h1 style="font-family:var(--font-serif); font-size:clamp(1.8rem,4vw,3rem); font-weight:400; color:var(--black); line-height:1.3; max-width:700px; margin-bottom:1rem;">${post.title}</h1>
+          <p style="font-size:0.8rem; color:var(--muted); letter-spacing:0.05em;">${post.author || ''} &nbsp;·&nbsp; ${dateStr}</p>
+        `;
 
-        grid.innerHTML = posts.map(p => {
-          const dateStr = new Date(p.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-          const slug = encodeURIComponent(p._filename);
-          return `
-            <article class="blog-card">
-              <a href="post.html?post=${slug}" class="blog-card__link-wrap">
-                <div class="blog-card__img" ${p.image ? `style="background-image:url('${p.image}'); background-size:cover; background-position:center; opacity:1;"` : ''}></div>
-                <div class="blog-card__body">
-                  <span class="blog-card__tag">${p.tag || ''}</span>
-                  <h3>${p.title}</h3>
-                  <p class="blog-card__meta">${p.author || ''} &nbsp;·&nbsp; ${dateStr}</p>
-                  <p class="blog-card__excerpt">${p.excerpt || ''}</p>
-                  <span class="blog-card__read">Read more →</span>
-                </div>
-              </a>
-            </article>
-          `;
-        }).join('');
+        contentEl.innerHTML = marked.parse(post.body || '');
 
       } catch (err) {
-        grid.innerHTML = '<p style="padding:2rem; color:var(--muted);">Unable to load posts right now.</p>';
+        headerEl.innerHTML = '<p>Sorry, this post could not be found.</p>';
         console.error(err);
       }
     }
-    loadPosts();
+    loadPost();
   </script>
 </body>
 </html>
