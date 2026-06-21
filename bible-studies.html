@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bible Studies | I Didn't Know I Was Me</title>
+  <meta name="description" content="Monthly Bible study devotionals from I Didn't Know I Was Me — walk through Scripture with our community of Gideons."/>
+  <link rel="icon" type="image/png" href="assets/logo-orange.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <a href="index.html" class="nav__logo"><img src="assets/logo-orange.png" alt="I Didn't Know I Was Me" style="height:28px; display:block;"></a>
+    <nav class="nav__links">
+      <a href="blog.html">Blog</a>
+      <a href="bible-studies.html">Bible Studies</a>
+      <a href="about.html">About Us</a>
+      <a href="founder.html">Our Story</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav__actions">
+      <a href="newsletter.html" class="btn btn--outline">Subscribe</a>
+      <a href="give.html" class="btn btn--fill">Give</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu__close" id="menuClose">✕</button>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="bible-studies.html">Bible Studies</a>
+      <a href="about.html">About Us</a>
+      <a href="founder.html">Our Story</a>
+      <a href="contact.html">Contact</a>
+      <a href="newsletter.html">Subscribe</a>
+      <a href="give.html" class="give-link">Give</a>
+    </nav>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <p class="section-label">Walk Through Scripture With Us</p>
+      <h1>Bible Studies</h1>
+      <p class="lede">Every month, we release a free devotional guide to walk through Scripture together as a community of Gideons. Download below and study at your own pace.</p>
+    </div>
+  </section>
+
+  <!-- STUDY GRID -->
+  <section class="container">
+    <div class="study-grid">
+
+      <div class="study-card">
+        <div class="study-card__month">August 2026</div>
+        <h3>31 Days Through Matthew</h3>
+        <p>A month-long journey through the Gospel of Matthew, with daily readings and focus questions to help you reflect on what God is saying to you.</p>
+        <a href="downloads/August_Bible_Study_Devotional.pdf" class="btn btn--fill" target="_blank">Download PDF →</a>
+      </div>
+
+      <div class="study-card" style="opacity:0.55;">
+        <div class="study-card__month">Coming Soon</div>
+        <h3>September Devotional</h3>
+        <p>Next month's study guide is being prepared. Subscribe to our newsletter to be the first to know when it drops.</p>
+        <a href="newsletter.html" class="btn btn--outline">Notify Me</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="newsletter">
+    <div class="container">
+      <div class="newsletter__inner">
+        <div>
+          <p class="section-label">Never Miss a Study</p>
+          <h2>Get notified every month.</h2>
+          <p>New devotionals delivered straight to your inbox the moment they drop.</p>
+        </div>
+        <form class="newsletter__form" onsubmit="handleSubscribe(event)">
+          <input type="email" placeholder="Your email address" required/>
+          <button type="submit" class="btn btn--fill">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <img src="assets/logo-orange.png" alt="I Didn't Know I Was Me" style="height:32px; margin-bottom:1rem;">
+          <p>I Didn't Know I Was Me is a gospel-centered community platform helping people discover and walk in their true identity in Christ through content, discipleship, and community.</p>
+          <div class="footer__socials">
+            <a href="https://www.instagram.com/ididntknowiwasmee" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.youtube.com/@Ididntknowiwasmepodcast" target="_blank" rel="noopener">YouTube</a>
+          </div>
+        </div>
+        <div class="footer__links">
+          <h4>Quick Links</h4>
+          <a href="about.html">About Us</a>
+          <a href="founder.html">Our Story</a>
+          <a href="blog.html">Blog</a>
+          <a href="bible-studies.html">Bible Studies</a>
+          <a href="contact.html">Contact</a>
+          <a href="give.html">Give</a>
+        </div>
+        <div class="footer__links">
+          <h4>Community</h4>
+          <a href="newsletter.html">Join Our Newsletter</a>
+          <a href="about.html#pillars">Our Pillars</a>
+          <a href="contact.html">Join Our Team</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2026 I Didn't Know I Was Me &nbsp;·&nbsp; <a href="privacy.html">Privacy Policy</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

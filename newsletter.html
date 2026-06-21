@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Join Our Newsletter | I Didn't Know I Was Me</title>
+  <meta name="description" content="Join the I Didn't Know I Was Me community newsletter — devotionals, resources, and updates straight to your inbox."/>
+  <link rel="icon" type="image/png" href="assets/logo-orange.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <a href="index.html" class="nav__logo"><img src="assets/logo-orange.png" alt="I Didn't Know I Was Me" style="height:28px; display:block;"></a>
+    <nav class="nav__links">
+      <a href="blog.html">Blog</a>
+      <a href="bible-studies.html">Bible Studies</a>
+      <a href="about.html">About Us</a>
+      <a href="founder.html">Our Story</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav__actions">
+      <a href="newsletter.html" class="btn btn--outline">Subscribe</a>
+      <a href="give.html" class="btn btn--fill">Give</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu__close" id="menuClose">✕</button>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="bible-studies.html">Bible Studies</a>
+      <a href="about.html">About Us</a>
+      <a href="founder.html">Our Story</a>
+      <a href="contact.html">Contact</a>
+      <a href="newsletter.html">Subscribe</a>
+      <a href="give.html" class="give-link">Give</a>
+    </nav>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero" style="text-align:center; border-bottom:none;">
+    <div class="container">
+      <p class="section-label" style="text-align:center;">Stay Connected</p>
+      <h1>Join Our Community</h1>
+      <p class="lede" style="margin-left:auto; margin-right:auto;">Devotionals, resources, and encouragement for the journey — straight to your inbox. No spam, just truth.</p>
+    </div>
+  </section>
+
+  <section style="padding:2rem 0 7rem;">
+    <div class="container" style="max-width:500px; text-align:center;">
+      <form onsubmit="handleNewsletterSubmit(event)" style="display:flex; flex-direction:column; gap:1rem; margin-top:1.5rem;">
+        <input type="text" placeholder="Your first name" required style="padding:1rem 1.25rem; border:1.5px solid rgba(26,20,16,0.15); border-radius:4px; font-family:inherit; font-size:0.95rem;">
+        <input type="email" placeholder="Your email address" required style="padding:1rem 1.25rem; border:1.5px solid rgba(26,20,16,0.15); border-radius:4px; font-family:inherit; font-size:0.95rem;">
+        <button type="submit" class="btn btn--fill btn--lg">Subscribe</button>
+      </form>
+      <p style="margin-top:1.5rem; font-size:0.8rem; color:var(--muted);">We respect your inbox. Unsubscribe anytime.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <img src="assets/logo-orange.png" alt="I Didn't Know I Was Me" style="height:32px; margin-bottom:1rem;">
+          <p>I Didn't Know I Was Me is a gospel-centered community platform helping people discover and walk in their true identity in Christ through content, discipleship, and community.</p>
+          <div class="footer__socials">
+            <a href="https://www.instagram.com/ididntknowiwasmee" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.youtube.com/@Ididntknowiwasmepodcast" target="_blank" rel="noopener">YouTube</a>
+          </div>
+        </div>
+        <div class="footer__links">
+          <h4>Quick Links</h4>
+          <a href="about.html">About Us</a>
+          <a href="founder.html">Our Story</a>
+          <a href="blog.html">Blog</a>
+          <a href="bible-studies.html">Bible Studies</a>
+          <a href="contact.html">Contact</a>
+          <a href="give.html">Give</a>
+        </div>
+        <div class="footer__links">
+          <h4>Community</h4>
+          <a href="newsletter.html">Join Our Newsletter</a>
+          <a href="about.html#pillars">Our Pillars</a>
+          <a href="contact.html">Join Our Team</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2026 I Didn't Know I Was Me &nbsp;·&nbsp; <a href="privacy.html">Privacy Policy</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    function handleNewsletterSubmit(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'Subscribed ✓';
+      btn.style.background = '#2a7a4b';
+      btn.style.borderColor = '#2a7a4b';
+      e.target.reset();
+      setTimeout(() => {
+        btn.textContent = 'Subscribe';
+        btn.style.background = '';
+        btn.style.borderColor = '';
+      }, 4000);
+    }
+  </script>
+</body>
+</html>
