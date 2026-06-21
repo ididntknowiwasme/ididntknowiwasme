@@ -1,26 +1,287 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Content Manager | I Didn't Know I Was Me</title>
-  <link rel="icon" type="image/png" href="../logo-orange.png"/>
-  <!-- Netlify Identity Widget -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>I Didn't Know I Was Me | Faith. Identity. Purpose.</title>
+  <meta name="description" content="I Didn't Know I Was Me is a gospel-centered community helping people discover and cultivate their true identity in Christ. A community of Gideons — mighty, chosen, and purpose-filled."/>
+  <meta name="keywords" content="faith, identity in Christ, Christian community, discipleship, purpose, Gideon, South Africa"/>
+  <meta property="og:title" content="I Didn't Know I Was Me | Faith. Identity. Purpose."/>
+  <meta property="og:description" content="Helping people discover their true identity in Christ. A community of Gideons — mighty, chosen, and purpose-filled."/>
+  <meta property="og:type" content="website"/>
+  <link rel="icon" type="image/png" href="logo-orange.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <!-- Decap CMS -->
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <a href="index.html" class="nav__logo"><img src="logo-orange.png" alt="I Didn't Know I Was Me" style="height:28px; display:block;"></a>
+    <nav class="nav__links">
+      <a href="blog.html">Blog</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="bible-studies.html">Bible Studies</a>
+      <a href="about.html">About Us</a>
+      <a href="founder.html">Our Story</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav__actions">
+      <a href="newsletter.html" class="btn btn--outline">Subscribe</a>
+      <a href="give.html" class="btn btn--fill">Give</a>
+    </div>
+    <button class="burger" id="burger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-menu__close" id="menuClose" aria-label="Close menu">✕</button>
+    <nav>
+      <a href="blog.html">Blog</a>
+      <a href="podcast.html">Podcast</a>
+      <a href="bible-studies.html">Bible Studies</a>
+      <a href="about.html">About Us</a>
+      <a href="founder.html">Our Story</a>
+      <a href="contact.html">Contact</a>
+      <a href="newsletter.html">Subscribe</a>
+      <a href="give.html" class="give-link">Give</a>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__inner">
+      <p class="hero__eyebrow">A Community of Gideons</p>
+      <h1 class="hero__title">
+        Discovering identities.<br>
+        <em>Cultivating purpose</em><br>
+        in Christ.
+      </h1>
+      <a href="about.html" class="btn btn--fill btn--lg">More About Us</a>
+    </div>
+  </section>
+
+  <!-- WHY WE EXIST -->
+  <section class="why">
+    <div class="container">
+      <p class="section-label">Why We Exist</p>
+      <h2 class="why__heading">I Didn't Know I Was Me exists to guide people in discovering their true identity in Christ — and help them walk boldly in who God says they are.</h2>
+      <div class="why__ctas">
+        <a href="newsletter.html" class="btn btn--fill">Join Our Community</a>
+        <a href="about.html" class="btn btn--outline">Learn More</a>
+      </div>
+      <div class="why__body">
+        <p>Before finding identity in Christ, many of us spent years searching in places that could never truly satisfy. Just as a product's full potential is known only by its manufacturer, only God fully knows who we are meant to be. Through His Word, we help people uncover and walk in their God-ordained purpose — free from the labels and limitations of the world.</p>
+        <p>The goal is not to be who the world says we are, but to become who God says we are. We are passionate about guiding people — especially young believers — toward discovering their God-given identity and purpose through biblical study, discipleship, and authentic community.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCRIPTURE BANNER -->
+  <section class="scripture-banner">
+    <div class="container">
+      <blockquote>
+        <span class="quote-mark">"</span>
+        The Lord is with you, mighty warrior.
+        <span class="scripture-ref">— Judges 6:12</span>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- BLOG SECTION -->
+  <section class="blog-section">
+    <div class="container">
+      <div class="section-header">
+        <div>
+          <p class="section-label">Latest</p>
+          <h2>Stories and devotionals about faith, identity, and hope.</h2>
+        </div>
+        <a href="blog.html" class="btn btn--outline">Read All Posts</a>
+      </div>
+
+      <div class="blog-grid" id="homeBlogGrid">
+        <p style="padding:2rem; color:var(--muted);">Loading posts...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="pillars" id="pillars">
+    <div class="container">
+      <p class="section-label">Our Goals</p>
+      <h2>Our Three Pillars</h2>
+      <p class="pillars__sub">Offering a space of belonging and vulnerability, rooted in the Word of God.</p>
+      <div class="pillars__grid">
+
+        <div class="pillar">
+          <div class="pillar__arrow">→</div>
+          <h3>Identity in Christ</h3>
+          <p>True identity can only be found in God. We help people uncover and embrace their God-given identity and purpose through His Word.</p>
+        </div>
+
+        <div class="pillar">
+          <div class="pillar__arrow">→</div>
+          <h3>Discipleship &amp; Growth</h3>
+          <p>We walk alongside each other as we grow in faith. Through biblical study, mentorship, and discipleship, we equip people to live boldly as who God has called them to be.</p>
+        </div>
+
+        <div class="pillar">
+          <div class="pillar__arrow">→</div>
+          <h3>Community &amp; Fellowship</h3>
+          <p>No one is meant to walk this journey alone. We are a family of believers, creating a safe space to be vulnerable, encouraged, and strengthened in faith.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACT STATS -->
+  <section class="impact">
+    <div class="container">
+      <p class="section-label">Our Growing Impact</p>
+      <h2>Building Community &amp; Awakening Purpose</h2>
+      <p class="impact__sub">We're building and engaging our community one brick at a time.</p>
+      <div class="impact__grid">
+        <div class="stat">
+          <div class="stat__num">2020</div>
+          <div class="stat__label">Year the vision was born — in the depths of the pandemic</div>
+        </div>
+        <div class="stat">
+          <div class="stat__num">3</div>
+          <div class="stat__label">Pillars guiding every piece of content and community we build</div>
+        </div>
+        <div class="stat">
+          <div class="stat__num">31</div>
+          <div class="stat__label">Days in our monthly Bible study, walking through Scripture together</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER STRIP -->
+  <section class="founder-strip">
+    <div class="container">
+      <div class="founder-strip__inner">
+        <div class="founder-strip__text">
+          <p class="section-label">Our Story</p>
+          <h2>From rock bottom to purpose.</h2>
+          <p>In 2020, at the lowest point of his life, Tshiamo Ramokgadi heard a strange instruction from God: <em>"Buy a podcasting kit."</em> For three years, it sat untouched. In May 2023, he finally surrendered — and everything changed.</p>
+          <a href="founder.html" class="btn btn--fill">Read Tshiamo's Story</a>
+        </div>
+        <div class="founder-strip__quote">
+          <blockquote>"I didn't know who I was — but you don't have to go through life not knowing who you are."</blockquote>
+          <cite>— Tshiamo Ramokgadi, Founder</cite>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter">
+    <div class="container">
+      <div class="newsletter__inner">
+        <div>
+          <p class="section-label">Stay Connected</p>
+          <h2>Join our community.</h2>
+          <p>Devotionals, resources, and updates — straight to your inbox.</p>
+        </div>
+        <form class="newsletter__form" onsubmit="handleSubscribe(event)">
+          <input type="email" placeholder="Your email address" required/>
+          <button type="submit" class="btn btn--fill">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <img src="logo-orange.png" alt="I Didn't Know I Was Me" style="height:32px; margin-bottom:1rem;">
+          <p>I Didn't Know I Was Me is a gospel-centered community platform helping people discover and walk in their true identity in Christ through content, discipleship, and community.</p>
+          <div class="footer__socials">
+            <a href="https://www.instagram.com/ididntknowiwasmee" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.youtube.com/@Ididntknowiwasmepodcast" target="_blank" rel="noopener">YouTube</a>
+          </div>
+        </div>
+        <div class="footer__links">
+          <h4>Quick Links</h4>
+          <a href="about.html">About Us</a>
+          <a href="founder.html">Our Story</a>
+          <a href="blog.html">Blog</a>
+      <a href="podcast.html">Podcast</a>
+          <a href="bible-studies.html">Bible Studies</a>
+          <a href="contact.html">Contact</a>
+          <a href="give.html">Give</a>
+        </div>
+        <div class="footer__links">
+          <h4>Community</h4>
+          <a href="newsletter.html">Join Our Newsletter</a>
+          <a href="about.html#pillars">Our Pillars</a>
+          <a href="contact.html">Join Our Team</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>© 2026 I Didn't Know I Was Me &nbsp;·&nbsp; <a href="privacy.html">Privacy Policy</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
   <script>
-    if (window.netlifyIdentity) {
-      window.netlifyIdentity.on("init", user => {
-        if (!user) {
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
+    async function loadHomePosts() {
+      const grid = document.getElementById('homeBlogGrid');
+      try {
+        const indexRes = await fetch('posts-index.json', { cache: 'no-store' });
+        const indexData = await indexRes.json();
+        const files = (indexData.posts || []).slice(0, 4);
+
+        if (files.length === 0) {
+          grid.innerHTML = '<p style="padding:2rem; color:var(--muted);">No posts yet. Check back soon.</p>';
+          return;
         }
-      });
+
+        const posts = await Promise.all(
+          files.map(async (f) => {
+            const r = await fetch(f, { cache: 'no-store' });
+            const data = await r.json();
+            data._filename = f;
+            return data;
+          })
+        );
+
+        posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        grid.innerHTML = posts.slice(0, 4).map(p => {
+          const dateStr = new Date(p.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+          const slug = encodeURIComponent(p._filename);
+          return `
+            <article class="blog-card">
+              <a href="post.html?post=${slug}" class="blog-card__link-wrap">
+                <div class="blog-card__img" ${p.image ? `style="background-image:url('${p.image}'); background-size:cover; background-position:center; opacity:1;"` : ''}></div>
+                <div class="blog-card__body">
+                  <span class="blog-card__tag">${p.tag || ''}</span>
+                  <h3>${p.title}</h3>
+                  <p class="blog-card__meta">${p.author || ''} &nbsp;·&nbsp; ${dateStr}</p>
+                  <p class="blog-card__excerpt">${p.excerpt || ''}</p>
+                  <span class="blog-card__read">Read more →</span>
+                </div>
+              </a>
+            </article>
+          `;
+        }).join('');
+
+      } catch (err) {
+        grid.innerHTML = '<p style="padding:2rem; color:var(--muted);">Unable to load posts right now.</p>';
+        console.error(err);
+      }
     }
+    loadHomePosts();
   </script>
 </body>
 </html>

@@ -113,7 +113,7 @@
       }
 
       try {
-        const res = await fetch('_posts/' + filename, { cache: 'no-store' });
+        const res = await fetch(filename, { cache: 'no-store' });
         if (!res.ok) throw new Error('Not found');
         const post = await res.json();
 

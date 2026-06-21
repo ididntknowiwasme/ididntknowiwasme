@@ -103,7 +103,7 @@
     async function loadPosts() {
       const grid = document.getElementById('blogGrid');
       try {
-        const indexRes = await fetch('_posts/index.json', { cache: 'no-store' });
+        const indexRes = await fetch('posts-index.json', { cache: 'no-store' });
         const indexData = await indexRes.json();
         const files = indexData.posts || [];
 
@@ -114,7 +114,7 @@
 
         const posts = await Promise.all(
           files.map(async (f) => {
-            const r = await fetch('_posts/' + f, { cache: 'no-store' });
+            const r = await fetch(f, { cache: 'no-store' });
             const data = await r.json();
             data._filename = f;
             return data;
