@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>I Didn&apos;t Know I Was Me</title>
+  <link>https://www.ididntknowiwasme.co.za/blog.html</link>
+  <description>Stories, devotionals, and reflections on faith, identity, and purpose in Christ.</description>
+  <language>en</language>
+  <lastBuildDate>Fri, 17 Jul 2026 18:30:06 GMT</lastBuildDate>
+
+  <item>
+    <title>The Promise Never Moves</title>
+    <link>https://www.ididntknowiwasme.co.za/post.html?post=_posts%2Fthe-promise-never-moves.json</link>
+    <guid isPermaLink="true">https://www.ididntknowiwasme.co.za/post.html?post=_posts%2Fthe-promise-never-moves.json</guid>
+    <pubDate>Sun, 05 Jul 2026 08:30:00 GMT</pubDate>
+    <author>Tshiamo Ramokgadi </author>
+    <description>The Promise Never Moves.</description>
+  </item>
+
+  <item>
+    <title>Ididntknowiwasme</title>
+    <link>https://www.ididntknowiwasme.co.za/post.html?post=_posts%2Fididntknowiwasme.json</link>
+    <guid isPermaLink="true">https://www.ididntknowiwasme.co.za/post.html?post=_posts%2Fididntknowiwasme.json</guid>
+    <pubDate>Sun, 28 Jun 2026 08:33:00 GMT</pubDate>
+    <author>Tshiamo Ramokgadi</author>
+    <description>Ididntknowiwasme</description>
+  </item>
+
+  <item>
+    <title>You Are Already Who God Says You Are</title>
+    <link>https://www.ididntknowiwasme.co.za/post.html?post=post-you-are-already-who-god-says-you-are.json</link>
+    <guid isPermaLink="true">https://www.ididntknowiwasme.co.za/post.html?post=post-you-are-already-who-god-says-you-are.json</guid>
+    <pubDate>Wed, 10 Jun 2026 08:00:00 GMT</pubDate>
+    <author>Tshiamo Ramokgadi</author>
+    <description>The world gives you a label. God gives you a name. And only one of them is true.</description>
+  </item>
+</channel>
+</rss>
