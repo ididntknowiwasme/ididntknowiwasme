@@ -93,8 +93,10 @@
           <h2>Get notified when tickets drop.</h2>
           <p>We'll email you the moment Sip &amp; Paint tickets go live on Quicket.</p>
         </div>
-        <form class="newsletter__form" onsubmit="handleSubscribe(event)">
-          <input type="email" placeholder="Your email address" required/>
+        <form class="newsletter__form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleSubscribe(event)">
+          <input type="hidden" name="form-name" value="newsletter"/>
+          <p style="position:absolute; left:-9999px;"><label>Don't fill this out: <input name="bot-field"/></label></p>
+          <input type="email" name="email" placeholder="Your email address" required/>
           <button type="submit" class="btn btn--fill">Subscribe</button>
         </form>
       </div>

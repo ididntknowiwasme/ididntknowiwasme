@@ -35,19 +35,46 @@ if (mobileMenu) {
   });
 }
 
-// --- NEWSLETTER FORM ---
-function handleSubscribe(e) {
+// --- SHARED: submit a Netlify Form via AJAX (no page reload) ---
+async function submitNetlifyForm(form) {
+  const data = new FormData(form);
+  const body = new URLSearchParams(data).toString();
+  const response = await fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body
+  });
+  if (!response.ok) {
+    throw new Error('Form submission failed: ' + response.status);
+  }
+}
+
+// --- NEWSLETTER FORM (mini version used on several pages) ---
+async function handleSubscribe(e) {
   e.preventDefault();
-  const input = e.target.querySelector('input[type="email"]');
-  const btn = e.target.querySelector('button');
-  const email = input.value;
-  btn.textContent = 'Subscribed ✓';
-  btn.style.background = '#2a7a4b';
-  btn.style.borderColor = '#2a7a4b';
-  btn.style.color = '#fff';
-  input.value = '';
-  input.placeholder = 'Thank you! Check your inbox.';
+  const form = e.target;
+  const input = form.querySelector('input[type="email"]');
+  const btn = form.querySelector('button');
+  btn.disabled = true;
+
+  try {
+    await submitNetlifyForm(form);
+    btn.textContent = 'Subscribed ✓';
+    btn.style.background = '#2a7a4b';
+    btn.style.borderColor = '#2a7a4b';
+    btn.style.color = '#fff';
+    input.value = '';
+    input.placeholder = 'Thank you! Check your inbox.';
+  } catch (err) {
+    btn.textContent = 'Something went wrong';
+    btn.style.background = '#b3261e';
+    btn.style.borderColor = '#b3261e';
+    btn.style.color = '#fff';
+    console.error(err);
+  }
+
   setTimeout(() => {
+    btn.disabled = false;
     btn.textContent = 'Subscribe';
     btn.style.background = '';
     btn.style.borderColor = '';
