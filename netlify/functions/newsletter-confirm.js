@@ -2,14 +2,21 @@
 //
 // Sends a "you're subscribed" confirmation email whenever someone submits
 // the "newsletter" form. Netlify Forms calls this automatically via an
-// outgoing webhook configured in the dashboard.
+// outgoing webhook (configured in the dashboard) — you don't call this
+// function from the frontend.
+//
+// Setup:
+// 1. Sign up at https://resend.com (free tier: 100 emails/day, 3,000/month)
+// 2. Verify a sending domain (or use their test domain while testing)
+// 3. Create an API key
+// 4. In Netlify: Site configuration -> Environment variables -> add
+//      RESEND_API_KEY = re_xxxxxxxxxx
+//      FROM_EMAIL = newsletter@yourdomain.co.za  (must be on a verified domain)
+// 5. In Netlify: Forms -> newsletter -> Settings -> Add outgoing webhook
+//      Event: New form submission
+//      URL: https://www.ididntknowiwasme.co.za/.netlify/functions/newsletter-confirm
 
 exports.handler = async (event) => {
-  // Log everything we receive first, before any early returns, so the
-  // Netlify function log always shows what actually came in.
-  console.log('newsletter-confirm invoked. Method:', event.httpMethod);
-  console.log('Raw body:', event.body);
-
   if (event.httpMethod !== 'POST') {
     return { statusCode: 405, body: 'Method Not Allowed' };
   }
@@ -18,27 +25,19 @@ exports.handler = async (event) => {
   try {
     body = JSON.parse(event.body);
   } catch (err) {
-    console.error('Failed to parse JSON body:', err.message);
     return { statusCode: 400, body: 'Invalid JSON' };
   }
 
-  // Netlify's outgoing webhook has been observed both wrapped in a
-  // top-level "payload" key and unwrapped, depending on version/event.
-  // Handle both shapes defensively.
-  const submission = body.payload || body;
-  const formName = submission.form_name;
-  const data = submission.data || {};
-
-  console.log('Resolved form_name:', formName, '| data:', JSON.stringify(data));
-
-  if (formName !== 'newsletter') {
-    console.log('Ignoring: form_name was not "newsletter"');
+  // Netlify's outgoing webhook payload shape:
+  // { payload: { form_name: "newsletter", data: { name, email, ... } } }
+  const payload = body.payload || {};
+  if (payload.form_name !== 'newsletter') {
+    // Not our form (e.g. the "contact" form also lives on this site) — ignore.
     return { statusCode: 200, body: 'Ignored: not newsletter form' };
   }
 
-  const { name, email } = data;
+  const { name, email } = payload.data || {};
   if (!email) {
-    console.error('No email found in submission data');
     return { statusCode: 400, body: 'Missing email in submission' };
   }
 
@@ -67,16 +66,15 @@ exports.handler = async (event) => {
       }),
     });
 
-    const resText = await res.text();
-    console.log('Resend API response status:', res.status, '| body:', resText);
-
     if (!res.ok) {
+      const errText = await res.text();
+      console.error('Resend API error:', res.status, errText);
       return { statusCode: 502, body: 'Failed to send confirmation email' };
     }
 
     return { statusCode: 200, body: 'Confirmation email sent' };
   } catch (err) {
-    console.error('Unexpected error sending confirmation email:', err.message);
+    console.error('Unexpected error sending confirmation email:', err);
     return { statusCode: 500, body: 'Internal error' };
   }
 };
