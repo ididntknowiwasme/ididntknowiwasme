@@ -1,3 +1,6 @@
 [build]
   publish = "."
   command = "node build-index.js"
+
+[functions."newsletter-digest"]
+  schedule = "0 8 * * 1"
