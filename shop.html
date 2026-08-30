@@ -3,17 +3,20 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Blog | I Didn't Know I Was Me</title>
-  <meta name="description" content="Stories, devotionals, and reflections on faith, identity, and purpose in Christ."/>
+  <title>Shop — Coming Soon | I Didn't Know I Was Me</title>
+  <meta name="description" content="The IDIKIM Shop is coming soon — apparel, journals, and resources built for who God says you are."/>
+  <meta property="og:title" content="Shop — Coming Soon | I Didn't Know I Was Me"/>
+  <meta property="og:description" content="Apparel, journals, and resources built for who God says you are — launching soon."/>
+  <meta property="og:type" content="website"/>
   <link rel="icon" type="image/png" href="logo-orange.png"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css"/>
-  <link rel="alternate" type="application/rss+xml" title="I Didn't Know I Was Me — Blog" href="/rss.xml"/>
 </head>
 <body>
 
+  <!-- NAV -->
   <header class="nav" id="nav">
     <a href="index.html" class="nav__logo"><img src="logo-orange.png" alt="I Didn't Know I Was Me" style="height:28px; display:block;"></a>
     <nav class="nav__links">
@@ -35,8 +38,9 @@
     </button>
   </header>
 
+  <!-- MOBILE MENU -->
   <div class="mobile-menu" id="mobileMenu">
-    <button class="mobile-menu__close" id="menuClose">✕</button>
+    <button class="mobile-menu__close" id="menuClose" aria-label="Close menu">✕</button>
     <nav>
       <a href="blog.html">Blog</a>
       <a href="podcast.html">Podcast</a>
@@ -54,16 +58,59 @@
   <!-- PAGE HERO -->
   <section class="page-hero">
     <div class="container">
-      <p class="section-label">Latest</p>
-      <h1>Stories &amp; Devotionals</h1>
+      <p class="section-label">Coming Soon</p>
+      <h1>The IDIKIM Shop</h1>
+      <p class="lede">Apparel, journals, and resources built for who God says you are. We're putting the finishing touches on it — sign up below and you'll be the first to know when it opens.</p>
     </div>
   </section>
 
-  <!-- BLOG GRID (populated by JS) -->
-  <section class="blog-page-grid">
+  <!-- WHAT'S COMING -->
+  <section class="pillars" id="whats-coming">
     <div class="container">
-      <div class="blog-grid" id="blogGrid">
-        <p style="padding:2rem; color:var(--muted);">Loading posts...</p>
+      <p class="section-label">What's Coming</p>
+      <h2>A shop built around identity, not inventory.</h2>
+      <p class="pillars__sub">Every piece will carry a piece of what we teach — identity, purpose, and community.</p>
+      <div class="pillars__grid">
+
+        <div class="pillar">
+          <div class="pillar__arrow">→</div>
+          <h3>Apparel</h3>
+          <p>Statement tees and hoodies carrying the truths we teach — the kind of pieces that start conversations.</p>
+        </div>
+
+        <div class="pillar">
+          <div class="pillar__arrow">→</div>
+          <h3>Journals &amp; Resources</h3>
+          <p>Devotional journals and Bible study guides designed to walk alongside our monthly studies.</p>
+        </div>
+
+        <div class="pillar">
+          <div class="pillar__arrow">→</div>
+          <h3>Event Merch</h3>
+          <p>Keepsakes from gatherings like BECOMING — a way to carry the room with you after it ends.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTIFY ME -->
+  <section class="newsletter">
+    <div class="container">
+      <div class="newsletter__inner">
+        <div>
+          <p class="section-label">Be First to Know</p>
+          <h2>Get notified when we launch.</h2>
+          <p>No spam — just one email the moment the shop goes live.</p>
+        </div>
+        <form class="newsletter__form" name="shop-notify" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+          <input type="hidden" name="form-name" value="shop-notify" />
+          <p class="hidden" style="display:none;">
+            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+          </p>
+          <input type="email" name="email" placeholder="Your email address" required/>
+          <button type="submit" class="btn btn--fill">Notify Me</button>
+        </form>
       </div>
     </div>
   </section>
@@ -74,7 +121,7 @@
       <div class="footer__top">
         <div class="footer__brand">
           <img src="logo-orange.png" alt="I Didn't Know I Was Me" style="height:32px; margin-bottom:1rem;">
-          <p>I Didn't Know I Was Me is a gospel-centered community platform helping people discover and walk in their true identity in Christ.</p>
+          <p>I Didn't Know I Was Me is a gospel-centered community platform helping people discover and walk in their true identity in Christ through content, discipleship, and community.</p>
           <div class="footer__socials">
             <a href="https://www.instagram.com/ididntknowiwasmee" target="_blank" rel="noopener">Instagram</a>
             <a href="https://www.youtube.com/@Ididntknowiwasmepodcast" target="_blank" rel="noopener">YouTube</a>
@@ -106,56 +153,5 @@
   </footer>
 
   <script src="script.js"></script>
-  <script>
-    async function loadPosts() {
-      const grid = document.getElementById('blogGrid');
-      try {
-        const indexRes = await fetch('posts-index.json', { cache: 'no-store' });
-        const indexData = await indexRes.json();
-        const files = indexData.posts || [];
-
-        if (files.length === 0) {
-          grid.innerHTML = '<p style="padding:2rem; color:var(--muted);">No posts yet. Check back soon.</p>';
-          return;
-        }
-
-        const posts = await Promise.all(
-          files.map(async (f) => {
-            const r = await fetch(f, { cache: 'no-store' });
-            const data = await r.json();
-            data._filename = f;
-            return data;
-          })
-        );
-
-        // Sort newest first
-        posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-        grid.innerHTML = posts.map(p => {
-          const dateStr = new Date(p.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-          const slug = encodeURIComponent(p._filename);
-          return `
-            <article class="blog-card">
-              <a href="post.html?post=${slug}" class="blog-card__link-wrap">
-                <div class="blog-card__img" ${p.image ? `style="background-image:url('${p.image}'); background-size:cover; background-position:center; opacity:1;"` : ''}></div>
-                <div class="blog-card__body">
-                  <span class="blog-card__tag">${p.tag || ''}</span>
-                  <h3>${p.title}</h3>
-                  <p class="blog-card__meta">${p.author || ''} &nbsp;·&nbsp; ${dateStr}</p>
-                  <p class="blog-card__excerpt">${p.excerpt || ''}</p>
-                  <span class="blog-card__read">Read more →</span>
-                </div>
-              </a>
-            </article>
-          `;
-        }).join('');
-
-      } catch (err) {
-        grid.innerHTML = '<p style="padding:2rem; color:var(--muted);">Unable to load posts right now.</p>';
-        console.error(err);
-      }
-    }
-    loadPosts();
-  </script>
 </body>
 </html>
