@@ -1,153 +1,627 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Shop — Coming Soon | I Didn't Know I Was Me</title>
-  <meta name="description" content="The IDIKIM Shop is coming soon — apparel, journals, and resources built for who God says you are."/>
-  <meta property="og:title" content="Shop — Coming Soon | I Didn't Know I Was Me"/>
-  <meta property="og:description" content="Apparel, journals, and resources built for who God says you are — launching soon."/>
-  <meta property="og:type" content="website"/>
-  <link rel="icon" type="image/png" href="logo-orange.png"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop — Drop 001: Becoming | I DIDN'T KNOW I WAS ME</title>
+<meta name="description" content="Shop Drop 001 — Becoming. T-shirts, headwear and the IDKIWM journal. Faith. Identity. Purpose.">
+<meta property="og:title" content="Shop — I DIDN'T KNOW I WAS ME">
+<meta property="og:description" content="Drop 001 — Becoming. Faith. Identity. Purpose.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖤</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Inter:wght@400;500;600&family=Fraunces:ital,wght@1,300&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#15130f; --ink-2:#1c1a14; --bone:#efe9dd; --bone-dim:#d9d2c2;
+    --sand:#b9ae9a; --olive:#3f3b2e; --rust:#7a3b22; --rust-bright:#95492c;
+    --line: rgba(239,233,221,0.14); --maxw: 1320px; --pad: clamp(20px, 5vw, 64px);
+  }
+  @media (prefers-color-scheme: dark){ :root{ --ink:#15130f; } }
+  :root[data-theme="dark"]{ --ink:#15130f; }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--ink); color:var(--bone); font-family:'Inter', -apple-system, sans-serif; -webkit-font-smoothing:antialiased; overflow-x:hidden;}
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  button{font-family:inherit;}
+  ::selection{background:var(--rust);color:var(--bone);}
+  :focus-visible{outline:2px solid var(--bone);outline-offset:3px;}
+
+  h1,h2,h3,.display{font-family:'Archivo', sans-serif; font-weight:900; line-height:0.96; letter-spacing:-0.01em; margin:0;}
+  .eyebrow-num{font-family:'Inter'; font-weight:600; font-size:13px; letter-spacing:0.04em; color:var(--sand);}
+  .serif-accent{font-family:'Fraunces', serif; font-style:italic; font-weight:300;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding-left:var(--pad); padding-right:var(--pad);}
+
+  .tex{position:relative; background:var(--ink-2); overflow:hidden;}
+  .tex::before{
+    content:""; position:absolute; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay; opacity:0.35; pointer-events:none;
+  }
+  .tex-warm{background:linear-gradient(160deg, #241c14, #15130f 70%);}
+  .tex-olive{background:linear-gradient(160deg, #2b2a1f, #15130f 70%);}
+  .tex-rust{background:linear-gradient(160deg, #2e1c12, #15130f 70%);}
+
+  /* ---------- HEADER ---------- */
+  header{position:fixed; top:0; left:0; right:0; z-index:80; display:flex; align-items:center; justify-content:space-between; padding:18px var(--pad); background:linear-gradient(to bottom, rgba(21,19,15,0.94), transparent);}
+  .logo{font-family:'Archivo'; font-weight:900; font-size:15px; letter-spacing:0.02em; cursor:pointer;}
+  .logo span{color:var(--sand); font-weight:500;}
+  nav.primary-nav{display:flex; gap:28px; font-size:13px; font-weight:600; letter-spacing:0.02em;}
+  nav.primary-nav a{opacity:0.85; transition:opacity .2s; cursor:pointer;}
+  nav.primary-nav a:hover{opacity:1;}
+  nav.primary-nav a.active{opacity:1; border-bottom:1px solid var(--bone); padding-bottom:2px;}
+  .nav-right{display:flex; align-items:center; gap:16px;}
+  .bag-btn{font-size:13px; font-weight:600; border:1px solid var(--line); padding:8px 14px; background:none; color:var(--bone); cursor:pointer;}
+  .menu-btn{display:none; background:none; border:none; color:var(--bone); cursor:pointer; font-size:20px;}
+  .mobile-nav{display:none; position:fixed; inset:0; z-index:90; background:var(--ink); padding:90px var(--pad) 40px; flex-direction:column; gap:26px;}
+  .mobile-nav.open{display:flex;}
+  .mobile-nav a{font-family:'Archivo'; font-weight:900; font-size:34px;}
+  .mobile-nav .close-mobile{position:absolute; top:20px; right:var(--pad); background:none; border:none; color:var(--bone); font-size:22px; cursor:pointer;}
+  @media (max-width:860px){ nav.primary-nav{display:none;} .menu-btn{display:block;} }
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative; min-height:100svh; display:flex; align-items:flex-end; padding-bottom:64px;}
+  .hero-photo{position:absolute; inset:0; background:radial-gradient(120% 100% at 75% 20%, #2c2013 0%, #1a160f 45%, #15130f 100%);}
+  .hero-photo::after{
+    content:""; position:absolute; inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+    mix-blend-mode:overlay; opacity:0.3;
+  }
+  .hero-inner{position:relative; z-index:2; width:100%;}
+  .hero-tag{font-size:13px; font-weight:600; letter-spacing:0.08em; color:var(--sand); margin-bottom:18px;}
+  .hero h1{font-size:clamp(42px, 9vw, 118px); max-width:14ch;}
+  .hero-meta{display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:24px; margin-top:36px; border-top:1px solid var(--line); padding-top:24px;}
+  .hero-drop{font-size:14px; font-weight:600; letter-spacing:0.03em; color:var(--sand);}
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{display:inline-block; font-family:'Inter'; font-weight:600; font-size:13px; letter-spacing:0.03em; padding:15px 28px; border:1px solid var(--bone); transition:background .2s, color .2s; cursor:pointer; background:none; color:var(--bone);}
+  .btn-solid{background:var(--rust); border-color:var(--rust); color:var(--bone);}
+  .btn-solid:hover{background:var(--rust-bright);}
+  .btn-outline:hover{background:var(--bone); color:var(--ink);}
+  .btn:disabled{opacity:0.4; cursor:not-allowed;}
+  .btn:disabled:hover{background:var(--rust); color:var(--bone);}
+
+  /* ---------- STATEMENT ---------- */
+  .statement{padding:130px 0; border-bottom:1px solid var(--line);}
+  .statement .wrap{display:grid; grid-template-columns:1fr 1.4fr; gap:60px;}
+  .statement h2{font-size:clamp(30px,4.2vw,52px);}
+  .statement p{font-size:19px; line-height:1.55; color:var(--bone-dim); max-width:52ch; margin:0 0 20px;}
+  @media (max-width:800px){ .statement .wrap{grid-template-columns:1fr;} }
+
+  .section-head{display:flex; align-items:baseline; justify-content:space-between; padding:0 0 40px; flex-wrap:wrap; gap:14px;}
+  .section-head h2{font-size:clamp(30px,4.5vw,54px);}
+  .drop{padding:110px 0;}
+  .drop-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr; grid-template-rows:auto auto; gap:2px; background:var(--line);}
+  .product-card{background:var(--ink); display:flex; flex-direction:column; cursor:pointer;}
+  .product-card:first-child{grid-row:span 2;}
+  .product-photo{aspect-ratio:4/5; position:relative;}
+  .product-card:first-child .product-photo{aspect-ratio:4/6.4;}
+  .product-info{padding:20px 22px 26px;}
+  .product-info .name{font-family:'Archivo'; font-weight:700; font-size:17px; margin-bottom:6px;}
+  .product-info .meta{display:flex; justify-content:space-between; font-size:13px; color:var(--sand);}
+  @media (max-width:860px){ .drop-grid{grid-template-columns:1fr 1fr;} .product-card:first-child{grid-column:span 2; grid-row:auto;} .product-card:first-child .product-photo{aspect-ratio:16/10;} }
+  @media (max-width:560px){ .drop-grid{grid-template-columns:1fr;} .product-card:first-child{grid-column:auto;} }
+
+  .story{padding:0; border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .story .grid2{display:grid; grid-template-columns:1fr 1fr;}
+  .story-photo{min-height:560px;}
+  .story-copy{padding:100px var(--pad); display:flex; flex-direction:column; justify-content:center;}
+  .story-copy .eyebrow-num{margin-bottom:20px;}
+  .story-copy h2{font-size:clamp(28px,3.6vw,44px); margin-bottom:26px;}
+  .story-copy p{font-size:18px; line-height:1.6; color:var(--bone-dim); max-width:48ch; margin:0 0 16px;}
+  .story-copy .serif-accent{font-size:22px; color:var(--bone); display:block; margin-bottom:22px;}
+  @media (max-width:860px){ .story .grid2{grid-template-columns:1fr;} .story-photo{min-height:360px;} .story-copy{padding:64px var(--pad);} }
+
+  .community{padding:110px 0;}
+  .comm-strip{display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:var(--line); margin-top:50px;}
+  .comm-strip .tex{aspect-ratio:3/4;}
+  @media (max-width:760px){ .comm-strip{grid-template-columns:repeat(2,1fr);} }
+  .community h2{font-size:clamp(30px,4.5vw,54px); max-width:12ch;}
+  .community .lede{font-size:17px; color:var(--bone-dim); max-width:44ch; margin-top:18px;}
+
+  .journal{border-top:1px solid var(--line); padding:0;}
+  .journal .grid2{display:grid; grid-template-columns:1fr 1fr;}
+  .journal-photo{min-height:520px;}
+  .journal-copy{padding:100px var(--pad); display:flex; flex-direction:column; justify-content:center;}
+  .journal-copy h2{font-size:clamp(30px,4vw,48px); margin-bottom:20px; max-width:9ch;}
+  .journal-copy p{font-size:17px; color:var(--bone-dim); line-height:1.6; max-width:42ch; margin:0 0 30px;}
+  .price-row{display:flex; align-items:center; gap:20px; margin-bottom:30px; font-size:15px;}
+  @media (max-width:860px){ .journal .grid2{grid-template-columns:1fr;} .journal-photo{min-height:340px;} .journal-copy{padding:64px var(--pad);} }
+
+  .newsletter{padding:120px 0; text-align:center; border-top:1px solid var(--line);}
+  .newsletter h2{font-size:clamp(34px,6vw,68px);}
+  .newsletter p{color:var(--bone-dim); font-size:16px; max-width:40ch; margin:18px auto 36px;}
+  .signup{display:flex; max-width:440px; margin:0 auto; border:1px solid var(--line);}
+  .signup input{flex:1; background:transparent; border:none; padding:16px 18px; color:var(--bone); font-family:'Inter'; font-size:14px;}
+  .signup input:focus{outline:none;}
+  .signup button{background:var(--rust); border:none; color:var(--bone); font-weight:600; font-size:13px; padding:0 22px; cursor:pointer; letter-spacing:0.02em;}
+  .signup button:hover{background:var(--rust-bright);}
+
+  footer{padding:70px 0 40px; border-top:1px solid var(--line);}
+  .foot-top{display:grid; grid-template-columns:1.4fr repeat(4, 1fr); gap:30px; padding-bottom:60px;}
+  .foot-brand .logo{margin-bottom:14px;}
+  .foot-brand p{color:var(--sand); font-size:14px; max-width:28ch; line-height:1.6;}
+  .foot-col h4{font-size:12px; letter-spacing:0.06em; color:var(--sand); margin:0 0 16px; font-weight:600;}
+  .foot-col a{display:block; font-size:14px; margin-bottom:11px; opacity:0.9; cursor:pointer;}
+  .foot-col a:hover{opacity:1; text-decoration:underline;}
+  .foot-bottom{display:flex; justify-content:space-between; align-items:center; padding-top:26px; border-top:1px solid var(--line); font-size:12px; color:var(--sand); flex-wrap:wrap; gap:12px;}
+  @media (max-width:760px){ .foot-top{grid-template-columns:1fr 1fr;} }
+
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:none;}
+  @media (prefers-reduced-motion: reduce){ .reveal{opacity:1; transform:none; transition:none;} html{scroll-behavior:auto;} }
+
+  /* ---------- VIEWS ---------- */
+  .view{display:none;}
+  .view.active{display:block;}
+
+  /* ---------- SHOP ---------- */
+  .shop-head{padding:150px 0 40px;}
+  .shop-head h1{font-size:clamp(38px,7vw,72px);}
+  .filters{display:flex; gap:10px; flex-wrap:wrap; margin-top:34px; margin-bottom:10px;}
+  .filter-btn{background:none; border:1px solid var(--line); color:var(--sand); font-size:12px; font-weight:600; letter-spacing:0.03em; padding:9px 16px; cursor:pointer; transition:all .15s;}
+  .filter-btn.active, .filter-btn:hover{border-color:var(--bone); color:var(--bone);}
+  .shop-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line); margin:40px 0 120px;}
+  .shop-card{background:var(--ink); cursor:pointer; position:relative;}
+  .shop-card .product-photo{aspect-ratio:4/5;}
+  .shop-card .product-photo .hover-tag{
+    position:absolute; bottom:14px; left:14px; font-size:11px; font-weight:600; letter-spacing:0.04em;
+    background:var(--ink); padding:6px 10px; opacity:0; transition:opacity .2s;
+  }
+  .shop-card:hover .hover-tag{opacity:1;}
+  @media (max-width:860px){ .shop-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:520px){ .shop-grid{grid-template-columns:1fr;} }
+
+  /* ---------- PRODUCT DETAIL ---------- */
+  .pd{padding:150px 0 130px;}
+  .pd-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:70px;}
+  .pd-gallery-main{aspect-ratio:4/5; margin-bottom:10px;}
+  .pd-thumbs{display:grid; grid-template-columns:repeat(4,1fr); gap:8px;}
+  .pd-thumbs .tex{aspect-ratio:1; cursor:pointer; outline:1px solid transparent;}
+  .pd-thumbs .tex.active-thumb{outline-color:var(--bone);}
+  .pd-info .cat{color:var(--sand); font-size:13px; font-weight:600; letter-spacing:0.03em; margin-bottom:10px;}
+  .pd-info h1{font-size:clamp(30px,4vw,46px); margin-bottom:14px;}
+  .pd-price{font-size:20px; font-weight:600; margin-bottom:30px;}
+  .pd-block-label{font-size:12px; font-weight:600; letter-spacing:0.05em; color:var(--sand); margin-bottom:12px;}
+  .swatches{display:flex; gap:10px; margin-bottom:30px; flex-wrap:wrap;}
+  .swatch{border:1px solid var(--line); padding:9px 16px; font-size:13px; cursor:pointer; background:none; color:var(--bone);}
+  .swatch.active{border-color:var(--bone); background:var(--bone); color:var(--ink);}
+  .sizes{display:flex; gap:8px; margin-bottom:30px; flex-wrap:wrap;}
+  .size-btn{width:48px; height:44px; border:1px solid var(--line); background:none; color:var(--bone); font-size:13px; cursor:pointer;}
+  .size-btn.active{border-color:var(--bone); background:var(--bone); color:var(--ink);}
+  .qty-row{display:flex; align-items:center; gap:16px; margin-bottom:26px;}
+  .qty-stepper{display:flex; align-items:center; border:1px solid var(--line);}
+  .qty-stepper button{background:none; border:none; color:var(--bone); width:38px; height:40px; font-size:16px; cursor:pointer;}
+  .qty-stepper span{width:34px; text-align:center; font-size:14px;}
+  .pd-cta{width:100%; margin-bottom:14px;}
+  .stock-note{font-size:13px; color:var(--sand); margin-bottom:44px;}
+  .pd-accordion{border-top:1px solid var(--line);}
+  .acc-item{border-bottom:1px solid var(--line);}
+  .acc-head{display:flex; justify-content:space-between; align-items:center; padding:20px 0; cursor:pointer; font-family:'Archivo'; font-weight:700; font-size:15px;}
+  .acc-body{max-height:0; overflow:hidden; transition:max-height .3s ease;}
+  .acc-body-inner{padding-bottom:22px; font-size:15px; color:var(--bone-dim); line-height:1.6; max-width:52ch;}
+  .acc-item.open .acc-body{max-height:400px;}
+  .acc-plus{font-size:20px; transition:transform .2s;}
+  .acc-item.open .acc-plus{transform:rotate(45deg);}
+  @media (max-width:860px){ .pd-grid{grid-template-columns:1fr; gap:36px;} }
+
+  .related-head{padding-top:100px; border-top:1px solid var(--line); margin-top:80px;}
+  .related-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line); margin-top:40px;}
+  @media (max-width:760px){ .related-grid{grid-template-columns:1fr 1fr;} }
+
+  /* ---------- CART DRAWER ---------- */
+  .overlay{position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:95; opacity:0; pointer-events:none; transition:opacity .25s;}
+  .overlay.open{opacity:1; pointer-events:auto;}
+  .cart-drawer{
+    position:fixed; top:0; right:0; bottom:0; width:min(420px, 100%); background:var(--ink);
+    border-left:1px solid var(--line); z-index:100; transform:translateX(100%); transition:transform .3s ease;
+    display:flex; flex-direction:column;
+  }
+  .cart-drawer.open{transform:translateX(0);}
+  .cart-head{display:flex; justify-content:space-between; align-items:center; padding:22px var(--pad); border-bottom:1px solid var(--line);}
+  .cart-head h3{font-size:16px;}
+  .cart-head button{background:none; border:none; color:var(--bone); font-size:20px; cursor:pointer;}
+  .cart-items{flex:1; overflow-y:auto; padding:10px var(--pad);}
+  .cart-item{display:flex; gap:14px; padding:18px 0; border-bottom:1px solid var(--line);}
+  .cart-item .tex{width:76px; height:92px; flex-shrink:0;}
+  .cart-item-info{flex:1; display:flex; flex-direction:column;}
+  .cart-item-info .nm{font-family:'Archivo'; font-weight:700; font-size:14px;}
+  .cart-item-info .vr{font-size:12px; color:var(--sand); margin-top:3px;}
+  .cart-item-info .row-bottom{display:flex; justify-content:space-between; align-items:center; margin-top:auto;}
+  .cart-item-info .remove{font-size:11px; color:var(--sand); text-decoration:underline; cursor:pointer; background:none; border:none; font-family:inherit;}
+  .cart-empty{padding:60px 0; text-align:center; color:var(--sand); font-size:14px;}
+  .cart-foot{padding:22px var(--pad) 28px; border-top:1px solid var(--line);}
+  .cart-subtotal{display:flex; justify-content:space-between; font-size:15px; margin-bottom:18px; font-weight:600;}
+  .checkout-note{font-size:12px; color:var(--sand); margin-top:12px; line-height:1.5;}
+</style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <header class="nav" id="nav">
-    <a href="index.html" class="nav__logo"><img src="logo-orange.png" alt="I Didn't Know I Was Me" style="height:28px; display:block;"></a>
-    <nav class="nav__links">
-      <a href="blog.html">Blog</a>
-      <a href="podcast.html">Podcast</a>
-      <a href="bible-studies.html">Bible Studies</a>
-      <a href="events.html">Events</a>
-      <a href="shop.html">Shop</a>
-      <a href="about.html">About Us</a>
-    </nav>
-    <div class="nav__actions">
-      <a href="newsletter.html" class="btn btn--outline">Subscribe</a>
-      <a href="give.html" class="btn btn--fill">Give</a>
-    </div>
-    <button class="burger" id="burger" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
-  </header>
-
-  <!-- MOBILE MENU -->
-  <div class="mobile-menu" id="mobileMenu">
-    <button class="mobile-menu__close" id="menuClose" aria-label="Close menu">✕</button>
-    <nav>
-      <a href="blog.html">Blog</a>
-      <a href="podcast.html">Podcast</a>
-      <a href="bible-studies.html">Bible Studies</a>
-      <a href="events.html">Events</a>
-      <a href="shop.html">Shop</a>
-      <a href="about.html">About Us</a>
-      <a href="newsletter.html">Subscribe</a>
-      <a href="give.html" class="give-link">Give</a>
-    </nav>
+<header>
+  <a class="logo" href="/">I DIDN'T KNOW I WAS ME <span>/ IDKIWM</span></a>
+  <nav class="primary-nav">
+    <a data-nav="shop" class="active">Shop</a>
+    <a href="/#story">Our Story</a>
+    <a href="/#community">Community</a>
+    <a href="/#journal">Journal</a>
+  </nav>
+  <div class="nav-right">
+    <button class="bag-btn" id="cartToggle">Bag (0)</button>
+    <button class="menu-btn" id="menuToggle" aria-label="Menu">☰</button>
   </div>
+</header>
 
-  <!-- PAGE HERO -->
-  <section class="page-hero">
-    <div class="container">
-      <p class="section-label">Coming Soon</p>
-      <h1>The IDIKIM Shop</h1>
-      <p class="lede">Apparel, journals, and resources built for who God says you are. We're putting the finishing touches on it — sign up below and you'll be the first to know when it opens.</p>
+<div class="mobile-nav" id="mobileNav">
+  <button class="close-mobile" id="mobileClose">✕</button>
+  <a data-nav="shop">Shop</a>
+  <a href="/#story">Our Story</a>
+  <a href="/#community">Community</a>
+  <a href="/#journal">Journal</a>
+  <a href="/">Home</a>
+</div>
+
+<!-- ============ SHOP ============ -->
+<section class="view active" id="view-shop">
+  <div class="wrap shop-head">
+    <div class="eyebrow-num">DROP 001</div>
+    <h1>Becoming</h1>
+    <div class="filters" id="shopFilters">
+      <button class="filter-btn active" data-cat="ALL">All</button>
+      <button class="filter-btn" data-cat="T-SHIRTS">T-Shirts</button>
+      <button class="filter-btn" data-cat="HEADWEAR">Headwear</button>
+      <button class="filter-btn" data-cat="OBJECTS">Objects</button>
     </div>
-  </section>
+  </div>
+  <div class="wrap"><div class="shop-grid" id="shopGrid"></div></div>
+</section>
 
-  <!-- WHAT'S COMING -->
-  <section class="pillars" id="whats-coming">
-    <div class="container">
-      <p class="section-label">What's Coming</p>
-      <h2>A shop built around identity, not inventory.</h2>
-      <p class="pillars__sub">Every piece will carry a piece of what we teach — identity, purpose, and community.</p>
-      <div class="pillars__grid">
-
-        <div class="pillar">
-          <div class="pillar__arrow">→</div>
-          <h3>Apparel</h3>
-          <p>Statement tees and hoodies carrying the truths we teach — the kind of pieces that start conversations.</p>
-        </div>
-
-        <div class="pillar">
-          <div class="pillar__arrow">→</div>
-          <h3>Journals &amp; Resources</h3>
-          <p>Devotional journals and Bible study guides designed to walk alongside our monthly studies.</p>
-        </div>
-
-        <div class="pillar">
-          <div class="pillar__arrow">→</div>
-          <h3>Event Merch</h3>
-          <p>Keepsakes from gatherings like BECOMING — a way to carry the room with you after it ends.</p>
-        </div>
-
+<!-- ============ PRODUCT DETAIL ============ -->
+<section class="view" id="view-product">
+  <div class="wrap pd">
+    <div class="pd-grid">
+      <div class="pd-gallery">
+        <div class="pd-gallery-main tex" id="pdMain"></div>
+        <div class="pd-thumbs" id="pdThumbs"></div>
       </div>
-    </div>
-  </section>
+      <div class="pd-info">
+        <div class="cat" id="pdCat"></div>
+        <h1 id="pdName"></h1>
+        <div class="pd-price" id="pdPrice"></div>
 
-  <!-- NOTIFY ME -->
-  <section class="newsletter">
-    <div class="container">
-      <div class="newsletter__inner">
-        <div>
-          <p class="section-label">Be First to Know</p>
-          <h2>Get notified when we launch.</h2>
-          <p>No spam — just one email the moment the shop goes live.</p>
-        </div>
-        <form class="newsletter__form" name="shop-notify" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-          <input type="hidden" name="form-name" value="shop-notify" />
-          <p class="hidden" style="display:none;">
-            <label>Don't fill this out if you're human: <input name="bot-field" /></label>
-          </p>
-          <input type="email" name="email" placeholder="Your email address" required/>
-          <button type="submit" class="btn btn--fill">Notify Me</button>
-        </form>
-      </div>
-    </div>
-  </section>
+        <div class="pd-block-label">Colour</div>
+        <div class="swatches" id="pdSwatches"></div>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__top">
-        <div class="footer__brand">
-          <img src="logo-orange.png" alt="I Didn't Know I Was Me" style="height:32px; margin-bottom:1rem;">
-          <p>I Didn't Know I Was Me is a gospel-centered community platform helping people discover and walk in their true identity in Christ through content, discipleship, and community.</p>
-          <div class="footer__socials">
-            <a href="https://www.instagram.com/ididntknowiwasmee" target="_blank" rel="noopener">Instagram</a>
-            <a href="https://www.youtube.com/@Ididntknowiwasmepodcast" target="_blank" rel="noopener">YouTube</a>
+        <div class="pd-block-label">Size</div>
+        <div class="sizes" id="pdSizes"></div>
+
+        <div class="qty-row">
+          <div class="pd-block-label" style="margin:0;">Quantity</div>
+          <div class="qty-stepper">
+            <button id="qtyMinus">–</button><span id="qtyVal">1</span><button id="qtyPlus">+</button>
           </div>
         </div>
-        <div class="footer__links">
-          <h4>Quick Links</h4>
-          <a href="about.html">About Us</a>
-          <a href="founder.html">Our Story</a>
-          <a href="blog.html">Blog</a>
-          <a href="podcast.html">Podcast</a>
-          <a href="bible-studies.html">Bible Studies</a>
-          <a href="events.html">Events</a>
-          <a href="shop.html">Shop</a>
-          <a href="contact.html">Contact</a>
-          <a href="give.html">Give</a>
+
+        <button class="btn btn-solid pd-cta" id="pdAddBtn">Add to bag</button>
+        <div class="stock-note" id="pdStock">In stock — ships in 2–4 days</div>
+
+        <div class="pd-accordion">
+          <div class="acc-item open">
+            <div class="acc-head">Product story <span class="acc-plus">+</span></div>
+            <div class="acc-body"><div class="acc-body-inner" id="pdStory"></div></div>
+          </div>
+          <div class="acc-item">
+            <div class="acc-head">Details <span class="acc-plus">+</span></div>
+            <div class="acc-body"><div class="acc-body-inner" id="pdDetails"></div></div>
+          </div>
+          <div class="acc-item">
+            <div class="acc-head">The meaning <span class="acc-plus">+</span></div>
+            <div class="acc-body"><div class="acc-body-inner" id="pdMeaning"></div></div>
+          </div>
         </div>
-        <div class="footer__links">
-          <h4>Community</h4>
-          <a href="newsletter.html">Join Our Newsletter</a>
-          <a href="about.html#pillars">Our Pillars</a>
-          <a href="contact.html">Join Our Team</a>
-        </div>
-      </div>
-      <div class="footer__bottom">
-        <p>© 2026 I Didn't Know I Was Me &nbsp;·&nbsp; <a href="privacy.html">Privacy Policy</a> &nbsp;·&nbsp; Developed by Tshiamo Ramokgadi</p>
       </div>
     </div>
-  </footer>
 
-  <script src="script.js"></script>
+    <div class="related-head">
+      <div class="section-head"><h2 style="font-size:28px;">Complete the look</h2></div>
+      <div class="related-grid" id="pdRelated"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="logo" href="/">I DIDN'T KNOW I WAS ME</a>
+        <p>A community of Gideons. Faith, identity, and purpose — worn, not just spoken.</p>
+      </div>
+      <div class="foot-col">
+        <h4>SHOP</h4>
+        <a data-nav="shop">T-Shirts</a><a data-nav="shop">Headwear</a><a data-nav="shop">Journal</a>
+      </div>
+      <div class="foot-col">
+        <h4>BRAND</h4>
+        <a href="/#story">Our Story</a><a href="/#community">Community</a>
+      </div>
+      <div class="foot-col">
+        <h4>SUPPORT</h4>
+        <a href="#">Shipping</a><a href="#">Returns</a><a href="#">Contact</a>
+      </div>
+      <div class="foot-col">
+        <h4>FOLLOW</h4>
+        <a href="#">Instagram</a><a href="#">WhatsApp</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>FAITH. IDENTITY. PURPOSE.</span>
+      <span>© 2026 IDKIWM. All prices in ZAR.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ CART DRAWER ============ -->
+<div class="overlay" id="overlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-head"><h3>Your bag</h3><button id="cartClose">✕</button></div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="cart-subtotal"><span>Subtotal</span><span id="cartSubtotal">R0</span></div>
+    <button class="btn btn-solid" style="width:100%;" id="checkoutBtn">Checkout</button>
+    <div class="checkout-note">Checkout connects to Yoco/Paystack once payment is wired in — this bag is fully functional, checkout is the next build step.</div>
+  </div>
+</div>
+
+<script>
+/* ---------------- PRODUCT DATA ---------------- */
+const PRODUCTS = [
+  { id:'becoming-tee-charcoal', name:'Becoming Tee', category:'T-SHIRTS', colorway:'Washed Charcoal', price:650, tex:'tex-warm', sizes:['S','M','L','XL','XXL'],
+    story:"The Becoming Tee was built as a piece you could wear before and after who you're figuring out becoming — denim, cargos, or straight off a Sunday. No loud graphics, just the weight of the fabric doing the talking.",
+    details:"260gsm heavyweight cotton. Relaxed, slightly oversized fit. Reinforced collar. Subtle back print. Made in South Africa.",
+    meaning:"Charcoal for the parts still being refined — the ash before the shape holds." },
+  { id:'becoming-tee-cream', name:'Becoming Tee', category:'T-SHIRTS', colorway:'Warm Cream', price:650, tex:'tex-rust', sizes:['S','M','L','XL','XXL'],
+    story:"Same cut, same weight, a lighter register. The cream colourway reads calm — built for the days that need less noise.",
+    details:"260gsm heavyweight cotton. Relaxed, slightly oversized fit. Reinforced collar. Subtle back print. Made in South Africa.",
+    meaning:"Cream for the clean slate — who you are before the world writes on you." },
+  { id:'becoming-tee-olive', name:'Becoming Tee', category:'T-SHIRTS', colorway:'Deep Olive', price:650, tex:'tex-olive', sizes:['S','M','L','XL','XXL'],
+    story:"The earth tone of the drop. Olive was chosen for how it wears in — it gets better with time, same as the process it names.",
+    details:"260gsm heavyweight cotton. Relaxed, slightly oversized fit. Reinforced collar. Subtle back print. Made in South Africa.",
+    meaning:"Olive for growth that doesn't announce itself — steady, rooted, ongoing." },
+  { id:'gideon-cap', name:'Gideon Cap', category:'HEADWEAR', colorway:'Charcoal', price:420, tex:'tex', sizes:['One Size'],
+    story:"Named for the story the brand is built on — a man who didn't see himself as capable until he was called by name. Low profile, structured crown, no oversized branding.",
+    details:"Cotton twill, structured 6-panel crown, adjustable strap. Embroidered mark at the back. One size fits most.",
+    meaning:"Worn low, not loud — a quiet reminder rather than a statement piece." },
+  { id:'the-journal', name:'The Journal', category:'OBJECTS', colorway:'Bone', price:380, tex:'tex-warm', sizes:['One Size'],
+    story:"Built for the work that happens before anyone sees it — prayer, reflection, the questions you're not ready to say out loud yet.",
+    details:"A5, 160 pages, cream uncoated paper. Bone linen hardcover. Ribbon marker. Elastic closure.",
+    meaning:"For the things God is still revealing — a place to write who you're becoming before you can say it out loud." },
+];
+
+/* ---------------- STATE ---------------- */
+let cart = [];
+try { const saved = localStorage.getItem('idkiwm_cart'); if (saved) cart = JSON.parse(saved); } catch(e) { cart = []; }
+
+let currentProduct = null;
+let selectedColorwayGroup = [];
+let selectedSize = null;
+let qty = 1;
+
+function saveCart(){ try { localStorage.setItem('idkiwm_cart', JSON.stringify(cart)); } catch(e){} }
+function money(n){ return 'R' + n.toLocaleString('en-ZA'); }
+
+/* ---------------- NAV / ROUTER ---------------- */
+function showView(name){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('view-'+name).classList.add('active');
+  window.scrollTo({top:0, behavior:'instant'});
+  document.querySelectorAll('nav.primary-nav a').forEach(a=>a.classList.toggle('active', a.dataset.nav===name));
+}
+document.querySelectorAll('[data-nav]').forEach(el=>{
+  el.addEventListener('click', (e)=>{
+    e.preventDefault();
+    const target = el.dataset.nav;
+    showView(target);
+    closeMobile();
+    if(el.dataset.scroll){
+      setTimeout(()=>{ document.getElementById(el.dataset.scroll)?.scrollIntoView({behavior:'smooth'}); }, 60);
+    }
+  });
+});
+
+/* mobile menu */
+const mobileNav = document.getElementById('mobileNav');
+document.getElementById('menuToggle').addEventListener('click', ()=> mobileNav.classList.add('open'));
+document.getElementById('mobileClose').addEventListener('click', closeMobile);
+function closeMobile(){ mobileNav.classList.remove('open'); }
+
+/* ---------------- RENDER: SHOP GRID ---------------- */
+function renderShopGrid(filter='ALL'){
+  const grid = document.getElementById('shopGrid');
+  const list = filter==='ALL' ? PRODUCTS : PRODUCTS.filter(p=>p.category===filter);
+  grid.innerHTML = list.map(p=>`
+    <div class="shop-card" data-open="${p.id}">
+      <div class="product-photo tex ${p.tex}"><span class="hover-tag">Quick view</span></div>
+      <div class="product-info">
+        <div class="name">${p.name}</div>
+        <div class="meta"><span>${p.colorway}</span><span>${money(p.price)}</span></div>
+      </div>
+    </div>`).join('');
+  grid.querySelectorAll('[data-open]').forEach(el=>el.addEventListener('click', ()=>openProduct(el.dataset.open)));
+}
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderShopGrid(btn.dataset.cat);
+  });
+});
+
+/* ---------------- PRODUCT DETAIL ---------------- */
+function openProduct(id){
+  const p = PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+  currentProduct = p;
+  selectedColorwayGroup = PRODUCTS.filter(x=>x.name===p.name && x.category===p.category);
+  selectedSize = p.sizes.includes('One Size') ? 'One Size' : null;
+  qty = 1;
+  renderProductDetail();
+  showView('product');
+}
+
+function renderProductDetail(){
+  const p = currentProduct;
+  document.getElementById('pdCat').textContent = p.category;
+  document.getElementById('pdName').textContent = p.name;
+  document.getElementById('pdPrice').textContent = money(p.price);
+  document.getElementById('pdStory').textContent = p.story;
+  document.getElementById('pdDetails').textContent = p.details;
+  document.getElementById('pdMeaning').textContent = p.meaning;
+  document.getElementById('qtyVal').textContent = qty;
+
+  const main = document.getElementById('pdMain');
+  main.className = 'pd-gallery-main tex ' + p.tex;
+
+  const thumbs = document.getElementById('pdThumbs');
+  thumbs.innerHTML = [p.tex, 'tex-warm', 'tex-olive', ''].map((t,i)=>
+    `<div class="tex ${t} ${i===0?'active-thumb':''}"></div>`).join('');
+  thumbs.querySelectorAll('.tex').forEach(th=>{
+    th.addEventListener('click', ()=>{
+      thumbs.querySelectorAll('.tex').forEach(t=>t.classList.remove('active-thumb'));
+      th.classList.add('active-thumb');
+      main.className = 'pd-gallery-main tex ' + [...th.classList].find(c=>c.startsWith('tex-')||c==='');
+    });
+  });
+
+  const swatches = document.getElementById('pdSwatches');
+  if(selectedColorwayGroup.length > 1){
+    swatches.style.display='flex';
+    swatches.innerHTML = selectedColorwayGroup.map(v=>
+      `<button class="swatch ${v.id===p.id?'active':''}" data-swatch="${v.id}">${v.colorway}</button>`).join('');
+    swatches.querySelectorAll('[data-swatch]').forEach(b=>b.addEventListener('click',()=>openProduct(b.dataset.swatch)));
+  } else {
+    swatches.style.display='none';
+  }
+
+  const sizes = document.getElementById('pdSizes');
+  sizes.innerHTML = p.sizes.map(s=>`<button class="size-btn ${s===selectedSize?'active':''}" data-size="${s}">${s}</button>`).join('');
+  sizes.querySelectorAll('[data-size]').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      selectedSize = b.dataset.size;
+      sizes.querySelectorAll('.size-btn').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      updateAddBtn();
+    });
+  });
+  updateAddBtn();
+
+  // related: same category, excluding current
+  const related = PRODUCTS.filter(x=>x.category===p.category && x.id!==p.id).concat(
+    PRODUCTS.filter(x=>x.category!==p.category)
+  ).slice(0,3);
+  document.getElementById('pdRelated').innerHTML = related.map(r=>`
+    <div class="shop-card" data-open="${r.id}">
+      <div class="product-photo tex ${r.tex}"></div>
+      <div class="product-info"><div class="name">${r.name}</div><div class="meta"><span>${r.colorway}</span><span>${money(r.price)}</span></div></div>
+    </div>`).join('');
+  document.getElementById('pdRelated').querySelectorAll('[data-open]').forEach(el=>el.addEventListener('click', ()=>openProduct(el.dataset.open)));
+}
+
+function updateAddBtn(){
+  const btn = document.getElementById('pdAddBtn');
+  btn.disabled = !selectedSize;
+  btn.textContent = selectedSize ? 'Add to bag' : 'Select a size';
+}
+
+document.getElementById('qtyMinus').addEventListener('click', ()=>{ if(qty>1){ qty--; document.getElementById('qtyVal').textContent=qty; } });
+document.getElementById('qtyPlus').addEventListener('click', ()=>{ qty++; document.getElementById('qtyVal').textContent=qty; });
+
+document.getElementById('pdAddBtn').addEventListener('click', ()=>{
+  if(!selectedSize) return;
+  addToCart(currentProduct, selectedSize, qty);
+  const btn = document.getElementById('pdAddBtn');
+  const original = btn.textContent;
+  btn.textContent = 'Added';
+  setTimeout(()=>{ btn.textContent = original; }, 1200);
+});
+
+/* accordion */
+document.querySelectorAll('.acc-head').forEach(h=>{
+  h.addEventListener('click', ()=>{
+    h.parentElement.classList.toggle('open');
+  });
+});
+
+/* home journal quick-add */
+document.querySelectorAll('[data-add]').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    const p = PRODUCTS.find(x=>x.id===btn.dataset.add);
+    addToCart(p, p.sizes[0], 1);
+  });
+});
+
+/* ---------------- CART LOGIC ---------------- */
+function addToCart(product, size, quantity){
+  const key = product.id + '|' + size;
+  const existing = cart.find(i=>i.key===key);
+  if(existing){ existing.qty += quantity; }
+  else { cart.push({ key, id:product.id, name:product.name, colorway:product.colorway, size, price:product.price, tex:product.tex, qty:quantity }); }
+  saveCart();
+  renderCart();
+  openCart();
+}
+
+function renderCart(){
+  const wrap = document.getElementById('cartItems');
+  const totalCount = cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('cartToggle').textContent = `Bag (${totalCount})`;
+  if(cart.length===0){
+    wrap.innerHTML = '<div class="cart-empty">Your bag is empty.</div>';
+  } else {
+    wrap.innerHTML = cart.map(i=>`
+      <div class="cart-item">
+        <div class="tex ${i.tex}"></div>
+        <div class="cart-item-info">
+          <div class="nm">${i.name}</div>
+          <div class="vr">${i.colorway} · Size ${i.size}</div>
+          <div class="row-bottom">
+            <span>${i.qty} × ${money(i.price)}</span>
+            <button class="remove" data-remove="${i.key}">Remove</button>
+          </div>
+        </div>
+      </div>`).join('');
+    wrap.querySelectorAll('[data-remove]').forEach(b=>{
+      b.addEventListener('click', ()=>{
+        cart = cart.filter(i=>i.key!==b.dataset.remove);
+        saveCart(); renderCart();
+      });
+    });
+  }
+  const subtotal = cart.reduce((s,i)=>s+i.qty*i.price,0);
+  document.getElementById('cartSubtotal').textContent = money(subtotal);
+}
+
+const cartDrawer = document.getElementById('cartDrawer');
+const overlay = document.getElementById('overlay');
+function openCart(){ cartDrawer.classList.add('open'); overlay.classList.add('open'); }
+function closeCart(){ cartDrawer.classList.remove('open'); overlay.classList.remove('open'); }
+document.getElementById('cartToggle').addEventListener('click', openCart);
+document.getElementById('cartClose').addEventListener('click', closeCart);
+overlay.addEventListener('click', closeCart);
+document.getElementById('checkoutBtn').addEventListener('click', ()=>{
+  if(cart.length===0) return;
+  alert('Checkout is UI-only for now. Once Yoco/Paystack is wired in, this button will send the bag to a real payment flow.');
+});
+
+/* ---------------- SCROLL REVEAL ---------------- */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+}, {threshold:0.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ---------------- INIT ---------------- */
+renderShopGrid();
+renderCart();
+</script>
+
 </body>
 </html>
