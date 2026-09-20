@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shop — Drop 001: Becoming | I DIDN'T KNOW I WAS ME</title>
-<meta name="description" content="Shop Drop 001 — Becoming. T-shirts, headwear and the IDKIWM journal. Faith. Identity. Purpose.">
-<meta property="og:title" content="Shop — I DIDN'T KNOW I WAS ME">
-<meta property="og:description" content="Drop 001 — Becoming. Faith. Identity. Purpose.">
+<title>I DIDN'T KNOW I WAS ME — Drop 001: Becoming</title>
+<meta name="description" content="Faith. Identity. Purpose. IDKIWM is a South African lifestyle brand for the person becoming who God made them to be. Shop Drop 001 — Becoming.">
+<meta property="og:title" content="I DIDN'T KNOW I WAS ME">
+<meta property="og:description" content="Faith. Identity. Purpose. A community of Gideons.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖤</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,7 +14,7 @@
 <style>
   :root{
     --ink:#15130f; --ink-2:#1c1a14; --bone:#efe9dd; --bone-dim:#d9d2c2;
-    --sand:#b9ae9a; --olive:#3f3b2e; --rust:#7a3b22; --rust-bright:#95492c;
+    --sand:#b9ae9a; --olive:#3f3b2e; --rust:#e8541a; --rust-bright:#f36a2e; --brand-brown:#3a2a20;
     --line: rgba(239,233,221,0.14); --maxw: 1320px; --pad: clamp(20px, 5vw, 64px);
   }
   @media (prefers-color-scheme: dark){ :root{ --ink:#15130f; } }
@@ -40,7 +40,9 @@
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
     mix-blend-mode:overlay; opacity:0.35; pointer-events:none;
   }
-  .tex-warm{background:linear-gradient(160deg, #241c14, #15130f 70%);}
+  .tex-warm{background:linear-gradient(160deg, var(--brand-brown), #1c130d 75%);}
+  .tex-white{background:linear-gradient(160deg, #f3efe6, #d8d2c4 75%);}
+  .tex-white::before{opacity:0.15;}
   .tex-olive{background:linear-gradient(160deg, #2b2a1f, #15130f 70%);}
   .tex-rust{background:linear-gradient(160deg, #2e1c12, #15130f 70%);}
 
@@ -182,10 +184,11 @@
   .pd-thumbs .tex.active-thumb{outline-color:var(--bone);}
   .pd-info .cat{color:var(--sand); font-size:13px; font-weight:600; letter-spacing:0.03em; margin-bottom:10px;}
   .pd-info h1{font-size:clamp(30px,4vw,46px); margin-bottom:14px;}
-  .pd-price{font-size:20px; font-weight:600; margin-bottom:30px;}
+  .pd-price{font-size:13px; font-weight:600; letter-spacing:0.03em; color:var(--sand); text-transform:uppercase; margin-bottom:30px;}
   .pd-block-label{font-size:12px; font-weight:600; letter-spacing:0.05em; color:var(--sand); margin-bottom:12px;}
   .swatches{display:flex; gap:10px; margin-bottom:30px; flex-wrap:wrap;}
-  .swatch{border:1px solid var(--line); padding:9px 16px; font-size:13px; cursor:pointer; background:none; color:var(--bone);}
+  .swatch{border:1px solid var(--line); padding:8px 16px 8px 12px; font-size:13px; cursor:pointer; background:none; color:var(--bone); display:inline-flex; align-items:center; gap:9px;}
+  .swatch-dot{width:13px; height:13px; border-radius:50%; border:1px solid var(--line); flex-shrink:0;}
   .swatch.active{border-color:var(--bone); background:var(--bone); color:var(--ink);}
   .sizes{display:flex; gap:8px; margin-bottom:30px; flex-wrap:wrap;}
   .size-btn{width:48px; height:44px; border:1px solid var(--line); background:none; color:var(--bone); font-size:13px; cursor:pointer;}
@@ -366,7 +369,7 @@
   <div class="cart-head"><h3>Your bag</h3><button id="cartClose">✕</button></div>
   <div class="cart-items" id="cartItems"></div>
   <div class="cart-foot">
-    <div class="cart-subtotal"><span>Subtotal</span><span id="cartSubtotal">R0</span></div>
+    <div class="cart-subtotal"><span>Items in bag</span><span id="cartSubtotal">0</span></div>
     <button class="btn btn-solid" style="width:100%;" id="checkoutBtn">Checkout</button>
     <div class="checkout-note">Checkout connects to Yoco/Paystack once payment is wired in — this bag is fully functional, checkout is the next build step.</div>
   </div>
@@ -375,23 +378,24 @@
 <script>
 /* ---------------- PRODUCT DATA ---------------- */
 const PRODUCTS = [
-  { id:'becoming-tee-charcoal', name:'Becoming Tee', category:'T-SHIRTS', colorway:'Washed Charcoal', price:650, tex:'tex-warm', sizes:['S','M','L','XL','XXL'],
-    story:"The Becoming Tee was built as a piece you could wear before and after who you're figuring out becoming — denim, cargos, or straight off a Sunday. No loud graphics, just the weight of the fabric doing the talking.",
-    details:"260gsm heavyweight cotton. Relaxed, slightly oversized fit. Reinforced collar. Subtle back print. Made in South Africa.",
-    meaning:"Charcoal for the parts still being refined — the ash before the shape holds." },
-  { id:'becoming-tee-cream', name:'Becoming Tee', category:'T-SHIRTS', colorway:'Warm Cream', price:650, tex:'tex-rust', sizes:['S','M','L','XL','XXL'],
-    story:"Same cut, same weight, a lighter register. The cream colourway reads calm — built for the days that need less noise.",
-    details:"260gsm heavyweight cotton. Relaxed, slightly oversized fit. Reinforced collar. Subtle back print. Made in South Africa.",
-    meaning:"Cream for the clean slate — who you are before the world writes on you." },
-  { id:'becoming-tee-olive', name:'Becoming Tee', category:'T-SHIRTS', colorway:'Deep Olive', price:650, tex:'tex-olive', sizes:['S','M','L','XL','XXL'],
-    story:"The earth tone of the drop. Olive was chosen for how it wears in — it gets better with time, same as the process it names.",
-    details:"260gsm heavyweight cotton. Relaxed, slightly oversized fit. Reinforced collar. Subtle back print. Made in South Africa.",
-    meaning:"Olive for growth that doesn't announce itself — steady, rooted, ongoing." },
-  { id:'gideon-cap', name:'Gideon Cap', category:'HEADWEAR', colorway:'Charcoal', price:420, tex:'tex', sizes:['One Size'],
+  { id:'idkiwm-tee-white', name:'IDKIWM Tee', category:'T-SHIRTS', colorway:'White', price:null, tex:'tex-white', sizes:['S','M','L','XL','XXL'],
+    story:"The idkiwm. mark sits quiet on the chest. Turn it around and it says the whole thing plainly — ALL WE NEED IS JESUS, John 14:6. Built oversized, built to be worn every day, not just Sundays.",
+    details:"100% cotton. Oversized, boxy fit. \"idkiwm.\" front logo, left chest. Full back print, centred.",
+    meaning:"White for the clean slate — who you are before the world writes on you." },
+  { id:'idkiwm-tee-black', name:'IDKIWM Tee', category:'T-SHIRTS', colorway:'Black', price:null, tex:'tex', sizes:['S','M','L','XL','XXL'],
+    story:"Same cut, same statement, in the colour that disappears into everything — denim, cargos, sneakers. The back print does the talking.",
+    details:"100% cotton. Oversized, boxy fit. \"idkiwm.\" front logo, left chest. Full back print, centred.",
+    meaning:"Black for the parts still being refined — the ash before the shape holds." },
+  { id:'idkiwm-tee-brown', name:'IDKIWM Tee', category:'T-SHIRTS', colorway:'Brown', price:null, tex:'tex-warm', sizes:['S','M','L','XL','XXL'],
+    story:"The earth tone of the drop. Cream print on brown, warmer and quieter than the other two — built for the days that need less noise.",
+    details:"100% cotton. Oversized, boxy fit. \"idkiwm.\" front logo, left chest. Full back print, centred.",
+    meaning:"Brown for growth that doesn't announce itself — steady, rooted, ongoing." },
+  { id:'gideon-cap', name:'Gideon Cap', category:'HEADWEAR', colorway:'Black', price:null, tex:'tex', sizes:['One Size'],
     story:"Named for the story the brand is built on — a man who didn't see himself as capable until he was called by name. Low profile, structured crown, no oversized branding.",
     details:"Cotton twill, structured 6-panel crown, adjustable strap. Embroidered mark at the back. One size fits most.",
     meaning:"Worn low, not loud — a quiet reminder rather than a statement piece." },
-  { id:'the-journal', name:'The Journal', category:'OBJECTS', colorway:'Bone', price:380, tex:'tex-warm', sizes:['One Size'],
+  { id:'the-journal', name:'The Journal', category:'OBJECTS', colorway:'Bone', price:null, tex:'tex-warm', sizes:['One Size'],
+
     story:"Built for the work that happens before anyone sees it — prayer, reflection, the questions you're not ready to say out loud yet.",
     details:"A5, 160 pages, cream uncoated paper. Bone linen hardcover. Ribbon marker. Elastic closure.",
     meaning:"For the things God is still revealing — a place to write who you're becoming before you can say it out loud." },
@@ -443,7 +447,7 @@ function renderShopGrid(filter='ALL'){
       <div class="product-photo tex ${p.tex}"><span class="hover-tag">Quick view</span></div>
       <div class="product-info">
         <div class="name">${p.name}</div>
-        <div class="meta"><span>${p.colorway}</span><span>${money(p.price)}</span></div>
+        <div class="meta"><span>${p.colorway}</span></div>
       </div>
     </div>`).join('');
   grid.querySelectorAll('[data-open]').forEach(el=>el.addEventListener('click', ()=>openProduct(el.dataset.open)));
@@ -472,7 +476,7 @@ function renderProductDetail(){
   const p = currentProduct;
   document.getElementById('pdCat').textContent = p.category;
   document.getElementById('pdName').textContent = p.name;
-  document.getElementById('pdPrice').textContent = money(p.price);
+  document.getElementById('pdPrice').textContent = 'Pricing coming soon';
   document.getElementById('pdStory').textContent = p.story;
   document.getElementById('pdDetails').textContent = p.details;
   document.getElementById('pdMeaning').textContent = p.meaning;
@@ -495,8 +499,9 @@ function renderProductDetail(){
   const swatches = document.getElementById('pdSwatches');
   if(selectedColorwayGroup.length > 1){
     swatches.style.display='flex';
+    const dotColor = {White:'#efe9dd', Black:'#15130f', Brown:'#3a2a20', Bone:'#efe9dd'};
     swatches.innerHTML = selectedColorwayGroup.map(v=>
-      `<button class="swatch ${v.id===p.id?'active':''}" data-swatch="${v.id}">${v.colorway}</button>`).join('');
+      `<button class="swatch ${v.id===p.id?'active':''}" data-swatch="${v.id}"><span class="swatch-dot" style="background:${dotColor[v.colorway]||'#888'}"></span>${v.colorway}</button>`).join('');
     swatches.querySelectorAll('[data-swatch]').forEach(b=>b.addEventListener('click',()=>openProduct(b.dataset.swatch)));
   } else {
     swatches.style.display='none';
@@ -521,7 +526,7 @@ function renderProductDetail(){
   document.getElementById('pdRelated').innerHTML = related.map(r=>`
     <div class="shop-card" data-open="${r.id}">
       <div class="product-photo tex ${r.tex}"></div>
-      <div class="product-info"><div class="name">${r.name}</div><div class="meta"><span>${r.colorway}</span><span>${money(r.price)}</span></div></div>
+      <div class="product-info"><div class="name">${r.name}</div><div class="meta"><span>${r.colorway}</span></div></div>
     </div>`).join('');
   document.getElementById('pdRelated').querySelectorAll('[data-open]').forEach(el=>el.addEventListener('click', ()=>openProduct(el.dataset.open)));
 }
@@ -584,7 +589,7 @@ function renderCart(){
           <div class="nm">${i.name}</div>
           <div class="vr">${i.colorway} · Size ${i.size}</div>
           <div class="row-bottom">
-            <span>${i.qty} × ${money(i.price)}</span>
+            <span>Qty ${i.qty}</span>
             <button class="remove" data-remove="${i.key}">Remove</button>
           </div>
         </div>
@@ -596,8 +601,8 @@ function renderCart(){
       });
     });
   }
-  const subtotal = cart.reduce((s,i)=>s+i.qty*i.price,0);
-  document.getElementById('cartSubtotal').textContent = money(subtotal);
+  const subtotal = cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('cartSubtotal').textContent = subtotal;
 }
 
 const cartDrawer = document.getElementById('cartDrawer');
