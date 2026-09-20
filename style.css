@@ -266,7 +266,7 @@ img { max-width: 100%; display: block; }
 
 .hero__photo{
   position:absolute; inset:0;
-  background-image:url('images/hero-photo.jpg');
+  background-image:url('hero-photo.jpg');
   background-size:cover;
   background-position:center 20%;
 }
