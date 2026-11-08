@@ -77,7 +77,11 @@ async function getSubscribers() {
   const emails = all
     .map((s) => s.data && s.data.email && s.data.email.trim().toLowerCase())
     .filter(Boolean);
-  return [...new Set(emails)];
+  const unique = [...new Set(emails)];
+  const valid = unique.filter((e) => /^[^\s@,]+@[^\s@,]+\.[^\s@,]+$/.test(e));
+  const invalid = unique.filter((e) => !valid.includes(e));
+  if (invalid.length) console.error('Skipping invalid addresses:', JSON.stringify(invalid));
+  return valid;
 }
 
 function buildDigestHtml(posts) {
@@ -154,7 +158,23 @@ exports.handler = async () => {
         body: JSON.stringify(emails),
       });
 
-      console.log('Resend batch status:', res.status, '| body:', await res.text());
+      const resText = await res.text();
+      console.log('Resend batch status:', res.status, '| body:', resText);
+
+      if (!res.ok) {
+        console.log('Batch failed, retrying one by one so a single bad address cannot block everyone');
+        for (const email of emails) {
+          const r = await fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: {
+              Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(email),
+          });
+          console.log(`Single send to ${email.to[0]}: status ${r.status}`);
+        }
+      }
     }
 
     return { statusCode: 200, body: `Digest sent to ${subscribers.length} subscriber(s)` };
